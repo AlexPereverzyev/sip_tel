@@ -1,0 +1,11 @@
+<configuration name="switch.conf" description="Core Configuration">
+  <settings>
+    <param name="colorize-console" value="true" />
+    <param name="dialplan-timestamps" value="false" />
+    <param name="loglevel" value="debug" />
+    <param name="max-sessions" value="1000" />
+    <param name="sessions-per-second" value="30" />
+    <param name="rtp-start-port" value="16384" />
+    <param name="rtp-end-port" value="32768" />
+  </settings>
+</configuration>

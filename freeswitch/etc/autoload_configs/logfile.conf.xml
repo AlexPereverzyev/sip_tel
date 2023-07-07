@@ -1,0 +1,15 @@
+<configuration name="logfile.conf" description="File Logging">
+  <settings>
+    <param name="rotate-on-hup" value="true" />
+  </settings>
+  <profiles>
+    <profile name="default">
+      <settings>
+        <param name="rollover" value="10485760" />
+      </settings>
+      <mappings>
+        <map name="all" value="debug,info,notice,warning,err,crit,alert" />
+      </mappings>
+    </profile>
+  </profiles>
+</configuration>

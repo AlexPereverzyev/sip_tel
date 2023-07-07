@@ -1,0 +1,29 @@
+<include>
+  <X-PRE-PROCESS cmd="set" data="default_password=12345" />
+
+  <X-PRE-PROCESS cmd="set" data="sound_prefix=$${sounds_dir}/en/us/allison" />
+  <X-PRE-PROCESS cmd="set" data="domain=$${local_ip_v4}" />
+  <X-PRE-PROCESS cmd="set" data="domain_name=$${domain}" />
+  <X-PRE-PROCESS cmd="set" data="hold_music=local_stream://moh" />
+  <X-PRE-PROCESS cmd="set" data="use_profile=internal" />
+
+  <X-PRE-PROCESS cmd="set"
+    data="rtp_sdes_suites=AEAD_AES_256_GCM_8|AEAD_AES_128_GCM_8|AES_CM_256_HMAC_SHA1_80|AES_CM_192_HMAC_SHA1_80|AES_CM_128_HMAC_SHA1_80|AES_CM_256_HMAC_SHA1_32|AES_CM_192_HMAC_SHA1_32|AES_CM_128_HMAC_SHA1_32|AES_CM_128_NULL_AUTH" />
+  <X-PRE-PROCESS cmd="set" data="codec_prefs=OPUS,PCMU" />
+  <X-PRE-PROCESS cmd="set" data="outbound_caller_name=FS" />
+  <X-PRE-PROCESS cmd="set" data="outbound_caller_id=0000000000" />
+
+  <X-PRE-PROCESS cmd="set" data="call_debug=false" />
+  <X-PRE-PROCESS cmd="set" data="console_loglevel=info" />
+  <X-PRE-PROCESS cmd="set" data="presence_privacy=false" />
+  <X-PRE-PROCESS cmd="set" data="unroll_loops=true" />
+
+  <X-PRE-PROCESS cmd="set" data="us-ring=%(2000,4000,440,480)" />
+  <X-PRE-PROCESS cmd="set" data="bong-ring=v=-7;%(100,0,941.0,1477.0);v=-7;>=2;+=.1;%(1400,0,350,440)" />
+  <X-PRE-PROCESS cmd="set" data="beep=%(1000,0,640)" />
+  <X-PRE-PROCESS cmd="set" data="sit=%(274,0,913.8);%(274,0,1370.6);%(380,0,1776.7)" />
+
+  <X-PRE-PROCESS cmd="set" data="bind_server_ip=auto" />
+  <X-PRE-PROCESS cmd="stun-set" data="external_rtp_ip=stun:stun.freeswitch.org" />
+  <X-PRE-PROCESS cmd="stun-set" data="external_sip_ip=stun:stun.freeswitch.org" />
+</include>

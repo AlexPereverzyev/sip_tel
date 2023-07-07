@@ -1,0 +1,59 @@
+<profile name="internal">
+  <gateways>
+    <gateway name="kamailio">
+      <param name="proxy" value="$${local_ip_v4}:5080" />
+      <param name="register" value="true" />
+      <param name="register-transport" value="tcp" />
+      <param name="realm" value="local-credentials" />
+      <param name="username" value="freeswitch" />
+      <param name="password" value="12345" />
+    </gateway>
+    <gateway name="twilio">
+      <param name="proxy" value="myterms.pstn.twilio.com" />
+      <param name="register" value="false" />
+      <param name="realm" value="twilio-credentials" />
+      <param name="username" value="username" />
+      <param name="password" value="password" />
+    </gateway>
+  </gateways>
+  <settings>
+    <param name="dialplan" value="XML" />
+    <param name="context" value="default" />
+    <param name="auth-calls" value="true" />
+    <param name="nonce-ttl" value="60" />
+
+    <param name="apply-inbound-acl" value="domains" />
+    <param name="apply-register-acl" value="none" />
+    <param name="local-network-acl" value="localnet.auto" />
+    <param name="sip-port" value="5060" />
+    <param name="rtp-ip" value="$${local_ip_v4}" />
+    <param name="sip-ip" value="$${local_ip_v4}" />
+    <param name="ext-rtp-ip" value="autonat:$${external_rtp_ip}" />
+    <param name="ext-sip-ip" value="autonat:$${external_sip_ip}" />
+
+    <param name="inbound-codec-prefs" value="$${codec_prefs}" />
+    <param name="outbound-codec-prefs" value="$${codec_prefs}" />
+    <param name="inbound-codec-negotiation" value="generous" />
+    <param name="inbound-late-negotiation" value="true" />
+
+    <param name="media_timeout" value="300" />
+    <param name="media_hold_timeout" value="1800" />
+    <param name="rtp-timer-name" value="soft" />
+    <param name="rfc2833-pt" value="101" />
+    <param name="dtmf-duration" value="2000" />
+
+    <param name="username" value="FS" />
+    <param name="user-agent-string" value="FS" />
+    <param name="inbound-use-callid-as-uuid" value="true" />
+    <param name="outbound-use-uuid-as-callid" value="true" />
+    <param name="enable-compact-headers" value="true" />
+    <param name="suppress-cng" value="true" />
+    <param name="disable-hold" value="true" />
+    <param name="manage-presence" value="false" />
+
+    <param name="debug" value="0" />
+    <param name="log-auth-failures" value="true" />
+    <param name="sip-trace" value="no" />
+    <param name="sip-capture" value="no" />
+  </settings>
+</profile>
