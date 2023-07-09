@@ -56,6 +56,39 @@ INSERT INTO usr_pbx (usr, sip_ep) VALUES ('1002', 'sip:freeswitch@192.168.0.000:
 
 _Note, setting `skip` for particular extension makes it freely routale w/o FreeSWITCH._
 
+_Note, in case FreeSWITCH is registering over TLS SIP profile with port 5061, the `sip_ep` should be updated accordingly._
+
+## TLS Setup
+
+-   generate certificates: `./certs.sh`
+-   set `#!define WITH_TLS` in config template
+-   for FreeSWITCH, follow `README.md` instructions in FreeSWITCH directory
+
+### TLS Linphone
+
+-   make `linphone` directory in home
+-   copy `cacert.pem` from kamailio directory to `linphone` directory
+-   copy `ext1002cert.pem` and `ext1002key.pem` to `linphone` directory
+-   update linphone config: `nano ~/.config/linphone/linphonerc`:
+
+```
+[sip]
+root_ca=~/linphone/cacert.pem
+client_cert_chain=~/linphone/ext1002cert.pem
+client_cert_key=~/linphone/ext1002key.pem
+verify_server_certs=1
+verify_server_cn=1
+```
+
+_Note: dont forget to replace ~_
+
+#### Alternatively (not tested)
+
+```
+sudo cp ~/linphone/cacert.pem /usr/local/share/ca-certificates/cacert.crt
+sudo update-ca-certificates
+```
+
 ## Manual Kamalio Installation
 
 https://kamailio.org/docs/tutorials/devel/kamailio-install-guide-deb/
@@ -90,3 +123,4 @@ https://nickvsnetworking.com/kamailio-use-case-sip-honeypot-with-sql-database/
 https://wazo-platform.org/blog/kamailio-routing-with-rtjson-and-http-async-client
 https://kamailio.org/docs/modules/5.7.x/modules/http_async_client.html
 https://kamailio.org/docs/modules/5.7.x/modules/rtjson.html
+https://kamailio.org/docs/modules/5.7.x/modules/tls.html

@@ -4,14 +4,15 @@
       <param name="proxy" value="$${local_ip_v4}:5080" />
       <param name="register" value="true" />
       <param name="register-transport" value="tcp" />
-      <param name="realm" value="local-credentials" />
+      <param name="realm" value="$${local_ip_v4}:5060" />
       <param name="username" value="freeswitch" />
       <param name="password" value="12345" />
+      <param name="expire-seconds" value="60" />
     </gateway>
     <gateway name="twilio">
       <param name="proxy" value="myterms.pstn.twilio.com" />
       <param name="register" value="false" />
-      <param name="realm" value="twilio-credentials" />
+      <param name="realm" value="$${external_sip_ip}:5060" />
       <param name="username" value="username" />
       <param name="password" value="password" />
     </gateway>
@@ -30,6 +31,17 @@
     <param name="sip-ip" value="$${local_ip_v4}" />
     <param name="ext-rtp-ip" value="autonat:$${external_rtp_ip}" />
     <param name="ext-sip-ip" value="autonat:$${external_sip_ip}" />
+
+    <param name="tls" value="true" />
+    <param name="tls-only" value="false" />
+    <param name="tls-bind-params" value="transport=tls" />
+    <param name="tls-sip-port" value="5061" />
+    <param name="tls-version" value="tlsv1.2" />
+    <param name="tls-verify-depth" value="3" />
+    <param name="tls-ciphers" value="ALL:!ADH:!LOW:!EXP:!MD5:@STRENGTH" />
+    <param name="tls-cert-dir" value="/etc/freeswitch/tls" />
+    <param name="tls-verify-date" value="true" />
+    <param name="tls-verify-policy" value="out" />
 
     <param name="inbound-codec-prefs" value="$${codec_prefs}" />
     <param name="outbound-codec-prefs" value="$${codec_prefs}" />

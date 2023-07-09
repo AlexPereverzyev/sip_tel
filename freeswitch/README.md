@@ -39,6 +39,13 @@ _Note: to get default config, run image w/o config voulme, then copy config to l
 docker cp freeswitch:/etc/freeswitch etc_default
 ```
 
+## TLS Setup
+
+-   after executing `./certs.sh` in kamailio directory:
+    -   append freeswitch certificate to private key file, copy it to `etc/tls` directory and rename it to `agent.pem`
+    -   copy `cacert.pem` to `etc/tls` directory and rename it to `cafile.pem`
+    -   set `register-transport` to `tls` in `internal.xml` kamailio gateway
+
 ## Misc
 
 ### Status and Reload Commands
@@ -87,6 +94,7 @@ https://developer.signalwire.com/freeswitch/FreeSWITCH-Explained/Introduction/Ca
 https://developer.signalwire.com/freeswitch/FreeSWITCH-Explained/Introduction/Endpoints_15696294
 https://developer.signalwire.com/freeswitch/FreeSWITCH-Explained/Introduction/Life-Cycle-of-a-Call_1048888
 https://developer.signalwire.com/freeswitch/FreeSWITCH-Explained/Configuration/Sofia-SIP-Stack/
+https://developer.signalwire.com/freeswitch/FreeSWITCH-Explained/Configuration/Sofia-SIP-Stack/Sofia-Configuration-Files_7144453/
 https://developer.signalwire.com/freeswitch/FreeSWITCH-Explained/Dialplan/XML-Dialplan/
 https://developer.signalwire.com/freeswitch/FreeSWITCH-Explained/Modules/mod_xml_curl_1049001/
 https://developer.signalwire.com/freeswitch/FreeSWITCH-Explained/Troubleshooting-Debugging/
