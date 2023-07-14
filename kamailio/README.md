@@ -89,6 +89,32 @@ sudo cp ~/linphone/cacert.pem /usr/local/share/ca-certificates/cacert.crt
 sudo update-ca-certificates
 ```
 
+## Datadog Metrics
+
+```
+docker run --name dd-agent \
+--network host \
+-e DD_API_KEY=secret \
+-e DD_HOSTNAME=kamailio-test \
+-e DD_TAGS='env:local servicename:kamailio' \
+-e DD_LOGS_ENABLED=false \
+-e DD_APM_ENABLED=false \
+-e DD_PROCESS_AGENT_ENABLED=false \
+-d gcr.io/datadoghq/agent:7
+
+docker stop dd-agent && docker rm dd-agent
+```
+
+https://www.kamailio.org/docs/modules/5.7.x/modules/timer.html
+https://www.kamailio.org/docs/modules/5.7.x/modules/rtimer.html
+https://www.kamailio.org/docs/modules/5.7.x/modules/jsonrpcs.html#jsonrpcs.f.jsonrpc_exec
+https://kamailio.org/wikidocs/tutorials/troubleshooting/memory/
+https://www.kamailio.org/docs/modules/5.7.x/modules/kex.html
+https://www.kamailio.org/docs/modules/5.7.x/modules/corex.html
+https://www.kamailio.org/docs/modules/5.7.x/modules/dlgs.html
+https://www.kamailio.org/docs/modules/5.7.x/modules/tls.html#tls.r.tls.list
+https://www.kamailio.org/docs/modules/5.7.x/modules/slack.html
+
 ## Manual Kamalio Installation
 
 https://kamailio.org/docs/tutorials/devel/kamailio-install-guide-deb/
