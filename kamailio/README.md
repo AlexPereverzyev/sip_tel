@@ -1,4 +1,4 @@
-## Kamailio Docker
+## Kamailio Docker Image
 
 ```
 docker build -t kamailio:local .
@@ -134,19 +134,19 @@ deb-src http://deb.kamailio.org/kamailio57 jammy main
 
 ## Read Order
 
-https://www.kamailio.org/wikidocs/
-https://www.kamailio.org/wikidocs/cookbooks/5.7.x/core
-https://www.kamailio.org/wikidocs/cookbooks/5.7.x/pseudovariables/
-https://www.kamailio.org/wikidocs/cookbooks/5.7.x/transformations/
-https://kamailio.org/docs/modules/5.7.x/
-https://kamailio.org/docs/modules/5.7.x/modules/usrloc.html
-https://kamailio.org/docs/modules/5.7.x/modules/registrar.html
-https://kamailio.org/docs/modules/5.7.x/modules/db_postgres.html
-https://kamailio.org/docs/modules/5.7.x/modules/sqlops.html
-https://kamailio.org/docs/modules/5.7.x/modules/nathelper.html
-https://nickvsnetworking.com/kamailio-introduction/
-https://nickvsnetworking.com/kamailio-use-case-sip-honeypot-with-sql-database/
-https://wazo-platform.org/blog/kamailio-routing-with-rtjson-and-http-async-client
-https://kamailio.org/docs/modules/5.7.x/modules/http_async_client.html
-https://kamailio.org/docs/modules/5.7.x/modules/rtjson.html
-https://kamailio.org/docs/modules/5.7.x/modules/tls.html
+- https://www.kamailio.org/wikidocs/
+- https://www.kamailio.org/wikidocs/cookbooks/5.7.x/core
+- https://www.kamailio.org/wikidocs/cookbooks/5.7.x/pseudovariables/
+- https://www.kamailio.org/wikidocs/cookbooks/5.7.x/transformations/
+- https://kamailio.org/docs/modules/5.7.x/
+- https://kamailio.org/docs/modules/5.7.x/modules/usrloc.html
+- https://kamailio.org/docs/modules/5.7.x/modules/registrar.html
+- https://kamailio.org/docs/modules/5.7.x/modules/db_postgres.html
+- https://kamailio.org/docs/modules/5.7.x/modules/sqlops.html
+- https://kamailio.org/docs/modules/5.7.x/modules/nathelper.html
+- https://nickvsnetworking.com/kamailio-introduction/
+- https://nickvsnetworking.com/kamailio-use-case-sip-honeypot-with-sql-database/
+- https://wazo-platform.org/blog/kamailio-routing-with-rtjson-and-http-async-client
+- https://kamailio.org/docs/modules/5.7.x/modules/http_async_client.html
+- https://kamailio.org/docs/modules/5.7.x/modules/rtjson.html
+- https://kamailio.org/docs/modules/5.7.x/modules/tls.html

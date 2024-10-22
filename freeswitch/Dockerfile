@@ -14,19 +14,21 @@ RUN apt-get update && \
     freeswitch-mod-abstraction \ 
     freeswitch-mod-commands \
     freeswitch-mod-console \
-    freeswitch-meta-codecs \
-    freeswitch-meta-conf \
-    freeswitch-meta-lang \
     freeswitch-mod-sofia \
     freeswitch-mod-shout \
     freeswitch-mod-event-socket \
     freeswitch-mod-curl \
     freeswitch-mod-dialplan-xml \
-    freeswitch-lang-en freeswitch-mod-sndfile \
+    freeswitch-mod-sndfile \
     freeswitch-mod-native-file \
     freeswitch-mod-tone-stream \
     freeswitch-mod-dptools \
     freeswitch-mod-hash \
+    freeswitch-mod-pgsql \
+    freeswitch-meta-codecs \
+    freeswitch-meta-conf \
+    freeswitch-meta-lang \
+    freeswitch-lang-en \
     freeswitch-sounds-en-us-allison && \
     apt-get clean autoclean && \
     apt-get autoremove --yes

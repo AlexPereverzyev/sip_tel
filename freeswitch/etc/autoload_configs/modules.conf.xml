@@ -15,7 +15,6 @@
     <!-- Applications -->
     <load module="mod_commands"/>
     <load module="mod_dptools"/>
-    <load module="mod_db"/>
     <load module="mod_expr"/>
     <load module="mod_hash"/>
 

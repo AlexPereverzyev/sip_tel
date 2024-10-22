@@ -7,8 +7,7 @@
   <X-PRE-PROCESS cmd="set" data="hold_music=local_stream://moh" />
   <X-PRE-PROCESS cmd="set" data="use_profile=internal" />
 
-  <X-PRE-PROCESS cmd="set"
-    data="rtp_sdes_suites=AEAD_AES_256_GCM_8|AEAD_AES_128_GCM_8|AES_CM_256_HMAC_SHA1_80|AES_CM_192_HMAC_SHA1_80|AES_CM_128_HMAC_SHA1_80|AES_CM_256_HMAC_SHA1_32|AES_CM_192_HMAC_SHA1_32|AES_CM_128_HMAC_SHA1_32|AES_CM_128_NULL_AUTH" />
+  <X-PRE-PROCESS cmd="set" data="rtp_sdes_suites=AEAD_AES_256_GCM_8|AEAD_AES_128_GCM_8|AES_CM_256_HMAC_SHA1_80|AES_CM_192_HMAC_SHA1_80|AES_CM_128_HMAC_SHA1_80|AES_CM_256_HMAC_SHA1_32|AES_CM_192_HMAC_SHA1_32|AES_CM_128_HMAC_SHA1_32|AES_CM_128_NULL_AUTH" />
   <X-PRE-PROCESS cmd="set" data="codec_prefs=OPUS,PCMU" />
   <X-PRE-PROCESS cmd="set" data="outbound_caller_name=FS" />
   <X-PRE-PROCESS cmd="set" data="outbound_caller_id=0000000000" />
@@ -26,4 +25,6 @@
   <X-PRE-PROCESS cmd="set" data="bind_server_ip=auto" />
   <X-PRE-PROCESS cmd="stun-set" data="external_rtp_ip=stun:stun.freeswitch.org" />
   <X-PRE-PROCESS cmd="stun-set" data="external_sip_ip=stun:stun.freeswitch.org" />
+
+  <X-PRE-PROCESS cmd="set" data="dsn=pgsql://host=localhost port=5432 dbname=freeswitch user=postgres password='postgres'" />
 </include>
