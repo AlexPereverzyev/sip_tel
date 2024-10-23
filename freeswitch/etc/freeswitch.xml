@@ -10,4 +10,7 @@
   <section name="directory" description="User Directory">
     <X-PRE-PROCESS cmd="include" data="directory/*.xml"/>
   </section>
+  <section name="languages" description="Language Management">
+    <X-PRE-PROCESS cmd="include" data="lang/en/*.xml"/>
+  </section>
 </document>

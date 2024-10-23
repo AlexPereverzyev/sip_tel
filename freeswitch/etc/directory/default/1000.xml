@@ -2,7 +2,7 @@
   <user id="1000">
     <params>
       <param name="password" value="$${default_password}"/>
-      <param name="vm-password" value="1000"/>
+      <param name="vm-password" value="$${default_password}"/>
     </params>
     <variables>
       <variable name="toll_allow" value="domestic,international,local"/>

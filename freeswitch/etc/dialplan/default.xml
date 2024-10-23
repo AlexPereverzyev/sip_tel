@@ -14,15 +14,31 @@
       </condition>
     </extension>
 
+    <extension name="voicemail_box">
+      <condition field="destination_number" expression="^8888$">
+        <action application="answer" />
+        <action application="sleep" data="1000" />
+        <action application="playback" data="ivr/ivr-hello.wav" />
+        <action application="voicemail" data="check default $${domain}" />
+        <action application="hangup" />
+      </condition>
+    </extension>
+
     <extension name="local">
       <condition field="destination_number" expression="^(100[0-9])$">
         <action application="export" data="dialed_extension=$1" />
         <action application="set" data="call_timeout=15" />
         <action application="set" data="bypass_media=false" />
+        <action application="set" data="continue_on_fail=true"/>
+        <action application="set" data="hangup_after_bridge=true"/>
         <!-- <action application="bridge" data="user/${dialed_extension}@${domain_name}" /> -->
         <!-- <action application="bridge" data="sofia/internal/${dialed_extension}%${domain_name}" /> -->
         <!-- <action application="bridge" data="sofia/gateway/kamailio/${dialed_extension}" /> -->
         <action application="bridge" data="{ignore_early_media=true}user/${dialed_extension}@${domain_name},sofia/gateway/kamailio/${dialed_extension}" />
+        <action application="answer" />
+        <action application="sleep" data="1000" />
+        <action application="voicemail" data="default $${domain} $1"/>
+        <action application="hangup" />
       </condition>
     </extension>
 

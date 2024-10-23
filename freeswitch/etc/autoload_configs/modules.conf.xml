@@ -17,6 +17,7 @@
     <load module="mod_dptools"/>
     <load module="mod_expr"/>
     <load module="mod_hash"/>
+    <load module="mod_voicemail"/>
 
     <!-- Dialplan Interfaces -->
     <load module="mod_dialplan_xml"/>
@@ -28,6 +29,9 @@
     
     <!-- Say -->
     <load module="mod_say_en"/>
+
+    <!-- mp3 streams/files-->
+    <load module="mod_shout"/>
 
      <!-- Codec Interfaces -->
     <load module="mod_opus"/>

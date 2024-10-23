@@ -14,8 +14,10 @@ RUN apt-get update && \
     freeswitch-mod-abstraction \ 
     freeswitch-mod-commands \
     freeswitch-mod-console \
+    freeswitch-mod-voicemail \
     freeswitch-mod-sofia \
     freeswitch-mod-shout \
+    freeswitch-mod-say-en \
     freeswitch-mod-event-socket \
     freeswitch-mod-curl \
     freeswitch-mod-dialplan-xml \
