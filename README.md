@@ -8,12 +8,13 @@ Remote softphones register on edge SIP routers (Kamailio), that accept registrat
 
 ## Implementation Details
 
--   scalable SIP router configuration
--   persistent TCP/TLS connections with softphone clients and PBXs
--   SIP requests are proxied to the exact instance where target softphone/PBX is registered
--   locations and extension to PBX mappings are stored in shared PostgreSQL database
--   only standard Kamailio modules used: usrloc, registrar, postgres, sqlops, nathelper, tls
--   tested with Linphone and Zoiper softphones on Linux and Android
+- scalable SIP router configuration
+- persistent TCP/TLS connections with softphone clients and PBXs
+- SIP requests are proxied to the exact instance where target softphone/PBX is registered
+- locations and extension to PBX mappings are stored in shared PostgreSQL database
+- only standard Kamailio modules used: usrloc, registrar, postgres, sqlops, nathelper, tls
+- tested with Linphone and Zoiper softphones on Linux and Android
+- FreeSwitch is configured to use Postgres as storage for core, sofia and voicemail modules
 
 ## Usage
 
