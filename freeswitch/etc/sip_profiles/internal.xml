@@ -1,5 +1,5 @@
 <profile name="internal">
-  <!-- <gateways>
+  <gateways>
     <gateway name="kamailio">
       <param name="proxy" value="$${local_ip_v4}:5080" />
       <param name="register" value="true" />
@@ -16,7 +16,7 @@
       <param name="username" value="username" />
       <param name="password" value="password" />
     </gateway>
-  </gateways> -->
+  </gateways>
   <settings>
     <param name="dialplan" value="XML" />
     <param name="context" value="default" />
