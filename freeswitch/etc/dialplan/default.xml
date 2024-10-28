@@ -2,10 +2,9 @@
 <include>
   <context name="default">
     <extension name="test">
-      <!-- <condition field="${acl(${network_addr} test_acl)}" expression="true"/> -->
+      <!-- <condition field="${acl(${network_addr} local)}" expression="true" /> -->
       <condition field="destination_number" expression="^9999$">
-        <!-- <action application="check_acl" data="${network_addr} 192.168.0.0/24 normal_clearing"
-        inline="true"/> -->
+        <!-- <action application="check_acl" data="${network_addr} local normal_clearing" inline="true" /> -->
         <action application="ring_ready" />
         <action application="answer" />
         <action application="sleep" data="1000" />

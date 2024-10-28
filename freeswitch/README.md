@@ -8,7 +8,7 @@ https://developer.signalwire.com/freeswitch/FreeSWITCH-Explained/Installation/HO
 ### FreeSWITCH Source
 
 Clone FreeSWITCH repo:
-https://github.com/signalwire/freeswitch/tree/v1.10.9
+https://github.com/signalwire/freeswitch/tree/v1.10.12
 
 Later the `scripts` directory will be mounted to the corresponding container.
 
@@ -124,12 +124,12 @@ When making calls to Twilio, make sure your geo permissions, source IP address a
 - https://developer.signalwire.com/freeswitch/FreeSWITCH-Explained/Configuration/Sofia-SIP-Stack/Sofia-Configuration-Files_7144453/
 - https://developer.signalwire.com/freeswitch/FreeSWITCH-Explained/Dialplan/XML-Dialplan/
 - https://developer.signalwire.com/freeswitch/FreeSWITCH-Explained/Modules/mod_xml_curl_1049001/
-- https://developer.signalwire.com/freeswitch/FreeSWITCH-Explained/Troubleshooting-Debugging/
--https://developer.signalwire.com/freeswitch/FreeSWITCH-Explained/Introduction/Event-System/
-- https://developer.signalwire.com/freeswitch/FreeSWITCH-Explained/Client-and-Developer-Interfaces/1048948
+- https://developer.signalwire.com/freeswitch/FreeSWITCH-Explained/Introduction/Event-System/
 - https://developer.signalwire.com/freeswitch/FreeSWITCH-Explained/Networking/3965687
 - https://developer.signalwire.com/freeswitch/FreeSWITCH-Explained/Networking/Auto-Nat_6587487
 - https://developer.signalwire.com/freeswitch/FreeSWITCH-Explained/Security/
+- https://developer.signalwire.com/freeswitch/FreeSWITCH-Explained/Client-and-Developer-Interfaces/1048948
+- https://developer.signalwire.com/freeswitch/FreeSWITCH-Explained/Troubleshooting-Debugging/
 - https://developer.signalwire.com/freeswitch/FreeSWITCH-Explained/Databases/FreeSWITCH-Databases_13173016
 
 ## Books

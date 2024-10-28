@@ -6,7 +6,7 @@
       <param name="register-transport" value="tcp" />
       <param name="realm" value="$${local_ip_v4}:5060" />
       <param name="username" value="freeswitch" />
-      <param name="password" value="12345" />
+      <param name="password" value="$${default_password}" />
       <param name="expire-seconds" value="60" />
     </gateway>
     <gateway name="twilio">
