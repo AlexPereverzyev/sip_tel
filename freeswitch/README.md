@@ -30,7 +30,7 @@ docker run --name freeswitch \
 After container has started, you can:
 
 ```
-docker exec -it freeswitch fs_cli
+docker exec -it freeswitch fs_cli -p 12345
 
 docker exec -it freeswitch sngrep
 

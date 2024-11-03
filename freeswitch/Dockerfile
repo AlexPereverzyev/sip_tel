@@ -19,8 +19,9 @@ RUN apt-get update && \
     freeswitch-mod-shout \
     freeswitch-mod-say-en \
     freeswitch-mod-event-socket \
-    freeswitch-mod-curl \
     freeswitch-mod-dialplan-xml \
+    freeswitch-mod-xml-curl \
+    freeswitch-mod-curl \
     freeswitch-mod-sndfile \
     freeswitch-mod-native-file \
     freeswitch-mod-tone-stream \

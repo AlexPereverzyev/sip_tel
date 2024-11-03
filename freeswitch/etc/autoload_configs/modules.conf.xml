@@ -21,6 +21,7 @@
 
     <!-- Dialplan Interfaces -->
     <load module="mod_dialplan_xml"/>
+    <load module="mod_xml_curl"/>
 
     <!-- File Format Interfaces -->
     <load module="mod_sndfile"/>

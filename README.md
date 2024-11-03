@@ -14,7 +14,8 @@ Remote softphones register on edge SIP routers (Kamailio), that accept registrat
 - locations and extension to PBX mappings are stored in shared PostgreSQL database
 - only standard Kamailio modules used: usrloc, registrar, postgres, sqlops, nathelper, tls
 - tested with Linphone and Zoiper softphones on Linux and Android
-- FreeSwitch is configured to use Postgres as storage for core, sofia and voicemail modules
+- FreeSWITCH is accompanied by Node.js configurator app, that serves test dialplan over REST API
+- FreeSWITCH is configured to use Postgres as storage for core, sofia and voicemail modules
 
 ## Usage
 

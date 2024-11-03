@@ -1,0 +1,17 @@
+[*]
+charset = utf-8
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.{ts,js}]
+indent_size = 2
+max_line_length = 120
+indent_brace_style = BSD KNF
+continuation_indent_size = 4
+curly_bracket_next_line = false
+spaces_around_brackets = outside
+spaces_around_operators = true
+
+[*.{yaml,json}]
+indent_size = 2
