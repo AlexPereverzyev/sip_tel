@@ -31,9 +31,7 @@ After container has started, you can:
 
 ```
 docker exec -it freeswitch fs_cli -p 12345
-
 docker exec -it freeswitch sngrep
-
 docker stop freeswitch && docker rm freeswitch
 ```
 
@@ -43,7 +41,7 @@ _Note: to get default config, run image w/o config voulme, then copy config to l
 docker cp freeswitch:/etc/freeswitch etc_default
 ```
 
-## Database Setup
+## FreeSWITCH Database
 
 The image relies on local PostgreSQL database instance:
 
@@ -52,7 +50,7 @@ docker run --name postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgre
 docker exec -it postgres psql -U postgres -c 'CREATE DATABASE freeswitch OWNER postgres;'
 ```
 
-After it started you can:
+After PostgreSQL container has started, you can:
 
 ```
 docker exec -it postgres psql -U postgres -d freeswitch
@@ -87,6 +85,13 @@ reload mod_sofia
 sofia profile internal rescan
 sofia profile internal restart
 ```
+
+### Supported Extensions
+
+- 9999: XML dialplan test
+- 8888: cURL/ESL dialplan test (requires running `configurator` app)
+- 7777: voicemail box
+- 100[0-2]: directory users (extensions)
 
 ### Add More Users
 

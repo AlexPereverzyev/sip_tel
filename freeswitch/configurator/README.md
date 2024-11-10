@@ -20,5 +20,10 @@ npm start
 ## Notes
 
 - the application logs all XML configuration requests from FreeSWITCH
-- if target user extension is `0000`, it generates dialpan with distinct greeting
+- if target user extension is `8888`, it generates dialpan that incudes ESL connection
+- the ESL connection enables call processing by ESL server within the same application
 - in all other cases, it responds with 404, forcing FreeSWITCH to seek configuration in filesystem
+
+## ESL REST API
+
+- curl localhost:8080/esl

@@ -14,13 +14,19 @@
   "dependencies": {
     "koa": "^2.15.3",
     "koa-bodyparser": "^4.4.1",
-    "koa-router": "^13.0.1"
+    "koa-router": "^13.0.1",
+    "modesl": "^1.2.1"
+  },
+  "overrides": {
+    "uuid": "7.0.3",
+    "xml2js": "0.5.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.12.0",
     "@types/koa": "^2.15.0",
     "@types/koa-bodyparser": "^4.3.12",
     "@types/koa-router": "^7.4.8",
+    "@types/modesl": "^1.1.6",
     "@types/node": "^22.5.5",
     "eslint": "^9.12.0",
     "prettier": "^3.3.3",

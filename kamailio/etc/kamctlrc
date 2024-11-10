@@ -33,13 +33,13 @@ DBNAME=kamailio
 DBRWUSER="postgres"
 
 ## password for database read/write user
-DBRWPW="admin"
+DBRWPW="postgres"
 
 ## database read only user
 DBROUSER="postgres"
 
 ## password for database read only user
-DBROPW="admin"
+DBROPW="postgres"
 
 ## database access host (from where is kamctl used)
 # DBACCESSHOST=192.168.0.1
@@ -50,7 +50,7 @@ DBROOTUSER="postgres"
 ## password for database super user
 ## - important: this is insecure, targeting the use only for automatic testing
 ## - known to work for: mysql
-DBROOTPW="admin"
+DBROOTPW="postgres"
 
 ## option to ask confirmation for all database creation steps
 DBINITASK=no

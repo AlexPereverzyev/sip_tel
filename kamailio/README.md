@@ -7,11 +7,13 @@ docker run --name kamailio \
 --network host \
 -v $(pwd)/etc:/etc/kamailio \
 -d kamailio:local
+```
 
+After container has started, you can:
+
+```
 docker exec -it kamailio sngrep
-
 docker exec -it kamailio kamcmd ul.dump
-
 docker stop kamailio && docker rm kamailio
 ```
 
@@ -24,7 +26,7 @@ docker cp kamailio:/etc/kamailio etc_default
 ### Kamailio Database
 
 ```
-docker run --name postgres -e POSTGRES_PASSWORD=admin -p 5432:5432 -d postgres:15
+docker run --name postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres:17
 ```
 
 After PostgreSQL container has started, create core Kamailio schema (you may need to run command from Kamailio container to do it):
@@ -32,11 +34,11 @@ After PostgreSQL container has started, create core Kamailio schema (you may nee
 ```
 docker exec -it kamailio bash
 
-export PGPASSWORD=admin
+export PGPASSWORD=postgres
 kamdbctl create
 ```
 
-_Note, additional features schema (eg presense) is not required._
+_Note, additional features schema (eg: presense) is not required._
 
 Then to create extension to PBX SIP endpoint mappings run:
 
@@ -64,7 +66,7 @@ _Note, in case FreeSWITCH is registering over TLS SIP profile with port 5061, th
 -   set `#!define WITH_TLS` in config template
 -   for FreeSWITCH, follow `README.md` instructions in FreeSWITCH directory
 
-### TLS Linphone
+### TLS for Linphone
 
 -   make `linphone` directory in home
 -   copy `cacert.pem` from kamailio directory to `linphone` directory
