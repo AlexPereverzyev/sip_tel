@@ -26,5 +26,5 @@
   <X-PRE-PROCESS cmd="stun-set" data="external_rtp_ip=stun:stun.freeswitch.org" />
   <X-PRE-PROCESS cmd="stun-set" data="external_sip_ip=stun:stun.freeswitch.org" />
 
-  <X-PRE-PROCESS cmd="set" data="dsn=pgsql://host=localhost port=5432 dbname=freeswitch user=postgres password='postgres'" />
+  <X-PRE-PROCESS cmd="set" data="dsn=pgsql://host=localhost port=5432 dbname=freeswitch user=postgres password='postgres' options='-c search_path=fs'" />
 </include>

@@ -48,6 +48,8 @@ The image relies on local PostgreSQL database instance:
 ```
 docker run --name postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres:17
 docker exec -it postgres psql -U postgres -c 'CREATE DATABASE freeswitch OWNER postgres;'
+docker exec -it postgres psql -U postgres -c 'CREATE SCHEMA fs AUTHORIZATION postgres;'
+
 ```
 
 After PostgreSQL container has started, you can:
