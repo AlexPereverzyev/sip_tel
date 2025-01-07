@@ -56,6 +56,9 @@ After PostgreSQL container has started, you can:
 
 ```
 docker exec -it postgres psql -U postgres -d freeswitch
+
+pg_dump -U postgres -h localhost -p 5432 -F c -b -v -t fs.voicemail_msgs -t public.* -f ./fs_db.dump freeswitch
+pg_restore --clean --if-exists -U postgres -h localhost -p 5432 -d freeswitch -v ./fs_db.dump
 ```
 
 _Note: this should be started before FreeSWITCH container._

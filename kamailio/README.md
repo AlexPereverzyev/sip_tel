@@ -1,4 +1,4 @@
-## Kamailio Docker Image
+## Kamailio 5.7.x Docker Image
 
 ```
 docker build -t kamailio:local .
@@ -25,14 +25,20 @@ docker cp kamailio:/etc/kamailio etc_default
 
 ### Kamailio Database
 
+Make sure PostgreSQL container is started:
+
 ```
 docker run --name postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres:17
 ```
 
-After PostgreSQL container has started, create core Kamailio schema (you may need to run command from Kamailio container to do it):
+Create core Kamailio schema:
 
 ```
-docker exec -it kamailio bash
+docker run -it --rm \
+--network host \
+--entrypoint=bash \
+-v $(pwd)/etc:/etc/kamailio \
+kamailio:local
 
 export PGPASSWORD=postgres
 kamdbctl create
@@ -57,6 +63,7 @@ INSERT INTO usr_pbx (usr, sip_ep) VALUES ('1002', 'sip:freeswitch@192.168.0.000:
 ```
 
 _Note, setting `skip` for particular extension makes it freely routale w/o FreeSWITCH._
+_Note, update `192.168.0.000` placeholder to the actual FreeSWITCH IP._
 
 _Note, in case FreeSWITCH is registering over TLS SIP profile with port 5061, the `sip_ep` should be updated accordingly._
 
