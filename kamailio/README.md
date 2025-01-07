@@ -63,6 +63,7 @@ INSERT INTO usr_pbx (usr, sip_ep) VALUES ('1002', 'sip:freeswitch@192.168.0.000:
 ```
 
 _Note, setting `skip` for particular extension makes it freely routale w/o FreeSWITCH._
+
 _Note, update `192.168.0.000` placeholder to the actual FreeSWITCH IP._
 
 _Note, in case FreeSWITCH is registering over TLS SIP profile with port 5061, the `sip_ep` should be updated accordingly._
@@ -114,15 +115,15 @@ docker run --name dd-agent \
 docker stop dd-agent && docker rm dd-agent
 ```
 
-https://www.kamailio.org/docs/modules/5.7.x/modules/timer.html
-https://www.kamailio.org/docs/modules/5.7.x/modules/rtimer.html
-https://www.kamailio.org/docs/modules/5.7.x/modules/jsonrpcs.html#jsonrpcs.f.jsonrpc_exec
-https://kamailio.org/wikidocs/tutorials/troubleshooting/memory/
-https://www.kamailio.org/docs/modules/5.7.x/modules/kex.html
-https://www.kamailio.org/docs/modules/5.7.x/modules/corex.html
-https://www.kamailio.org/docs/modules/5.7.x/modules/dlgs.html
-https://www.kamailio.org/docs/modules/5.7.x/modules/tls.html#tls.r.tls.list
-https://www.kamailio.org/docs/modules/5.7.x/modules/slack.html
+- https://www.kamailio.org/docs/modules/5.7.x/modules/timer.html
+- https://www.kamailio.org/docs/modules/5.7.x/modules/rtimer.html
+- https://www.kamailio.org/docs/modules/5.7.x/modules/jsonrpcs.html#jsonrpcs.f.jsonrpc_exec
+- https://kamailio.org/wikidocs/tutorials/troubleshooting/memory/
+- https://www.kamailio.org/docs/modules/5.7.x/modules/kex.html
+- https://www.kamailio.org/docs/modules/5.7.x/modules/corex.html
+- https://www.kamailio.org/docs/modules/5.7.x/modules/dlgs.html
+- https://www.kamailio.org/docs/modules/5.7.x/modules/tls.html#tls.r.tls.list
+- https://www.kamailio.org/docs/modules/5.7.x/modules/slack.html
 
 ## Manual Kamalio Installation
 
