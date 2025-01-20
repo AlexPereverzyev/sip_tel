@@ -1,22 +1,24 @@
-# Kamailio + FreeSWITCH
+## Connecting Softphones and FreeSWITCH PBXs with Kamailio + RTPEngine
 
-The projects demonstrates how tenants softphones and FreeSWITCH PBXs can be connected to each other using Kamailio SIP router to enable advanced calls routing, logging, measurements and NAT traversal.
+This project demonstrates how Kamailio, a SIP router, can connect tenant FreeSWITCH PBXs and softphones. It enables features like advanced call routing, logging, measurements, and NAT traversal.
 
 ## Main Use Case
 
-Remote softphones register on edge SIP routers (Kamailio), that accept registrations and route SIP requests to pre-configured softphone PBX (FreeSWITCH). In response to SIP invite, PBX simultaneously rings extension on the corresponding local and remote softphones or sends SIP to PSTN gateway (Twilio). Local PBX softphones are able to reach out to remote softphones via the same SIP router.
+Remote softphones register with Kamailio, which routes SIP requests to the configured FreeSWITCH PBX. When a call arrives to FreeSWITCH, it rings both the local and remote softphones simultaneously and/or sends call to a PSTN gateway (Twilio). Local (internal) softphones can also make calls to remote softphones through Kamailio. RTPEngine is used as media proxy to ensure devices behind symmetric NAT can commmunicate with each other.
 
-## Implementation Details
+## Implementation
 
-- scalable SIP router configuration
-- persistent TCP/TLS connections with softphone clients and PBXs
-- SIP requests are proxied to the exact instance where target softphone/PBX is registered
-- locations and extension to PBX mappings are stored in shared PostgreSQL database
-- only standard Kamailio modules used: usrloc, registrar, postgres, sqlops, nathelper, tls
-- tested with Linphone and Zoiper softphones on Linux and Android
-- FreeSWITCH is accompanied by Node.js configurator app, that serves test dialplan over REST API
-- FreeSWITCH is configured to use Postgres as storage for core, sofia and voicemail modules
+* Scalable SIP router and media proxy configuration
+* Persistent TCP/TLS connections with softphones and PBXs
+* SIP requests are routed to the specific instance where the target softphone/PBX is registered
+* Locations and extension mappings are stored in a shared PostgreSQL database
+* Uses standard Kamailio modules only: usrloc, registrar, postgres, sqlops, nathelper, tls
+* Tested with Linphone and Zoiper softphones on Linux and Android
+* FreeSWITCH uses a Node.js configurator app, that serves dialplan via REST API
+* FreeSWITCH is configured to use PostgreSQL for core, sofia, and voicemail modules
 
 ## Usage
 
-To build Docker images and start Kamailio and FreeSWITCH go through readme files. Make sure your local network is 192.168.0.0/24, otherwise update the configs. If all good, Kamailio and FreeSWITCH should be listening on ports 5080 and 5060, 5061 (`netstat -ntlp`). Then configure PBX mappings in database and start registering softphones on Kamailio or FreeSWITCH with extensions 1000-1002 and password 12345.
+Follow the instructions in the `README.md` files (in order) to build Docker images and start RTPEngine, Kamailio, and FreeSWITCH. Update configurations if your network is not 192.168.0.0/24.
+
+Once running, Kamailio and FreeSWITCH should be listening on standard ports (5060, 5061, 5080) and RTPEngine on ports 2223-2225 (verify with `netstat -ntlp` or `nulp`). Configure PBX mappings in the database, register softphones (extensions 1000-1002, password 12345) on Kamailio (external) or FreeSWITCH (internal), and start making calls.

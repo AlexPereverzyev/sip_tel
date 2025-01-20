@@ -5,8 +5,8 @@ EXTERNAL_IP=$(echo $(curl -s http://checkip.amazonaws.com/))
 echo $LOCAL_IP
 echo $EXTERNAL_IP
 
-if [ -e "/etc/kamailio/kamailio-temp.cfg" ]; then
-    cp "/etc/kamailio/kamailio-temp.cfg" "/etc/kamailio/kamailio.cfg"
+if [ -e "/etc/kamailio/kamailio-schema.cfg" ]; then
+    cp "/etc/kamailio/kamailio-schema.cfg" "/etc/kamailio/kamailio.cfg"
     sed -i "s/PRIVATE_IP/$LOCAL_IP/g" /etc/kamailio/kamailio.cfg
     sed -i "s/PUBLIC_IP/$EXTERNAL_IP/g" /etc/kamailio/kamailio.cfg
 fi

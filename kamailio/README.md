@@ -9,6 +9,8 @@ docker run --name kamailio \
 -d kamailio:local
 ```
 
+_Note: by default Kamailio uses RTPEngine instance as media proxy, if you dont want it, just undefine `WITH_RTPENGINE` in configuration file._
+
 After container has started, you can:
 
 ```

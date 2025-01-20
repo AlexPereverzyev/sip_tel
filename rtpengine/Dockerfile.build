@@ -1,0 +1,51 @@
+FROM debian:bookworm-slim AS build
+
+ARG TAG_NAME
+
+WORKDIR /build
+
+RUN apt-get update && \
+  apt-get install -y build-essential git curl && \
+  git clone https://github.com/sipwise/rtpengine && \
+  cd rtpengine && \
+  git checkout ${TAG_NAME} && \
+  apt-get build-dep -y . && \
+  dpkg-buildpackage
+
+FROM debian:bookworm-slim
+
+COPY --from=build /build/ngcp-rtpengine-daemon_*.deb /tmp/
+
+RUN mkdir -p /etc/modprobe.d/ && \
+  apt-get update && \
+  apt-get install -y \
+  curl \
+  iptables \
+  libavcodec59 \
+  libavformat59 \
+  libavutil57 \
+  libevent-2.1-7 \
+  libevent-pthreads-2.1-7 \
+  libglib2.0-0 \
+  libhiredis0.14 \
+  libip4tc2 \
+  libip6tc2 \
+  libjson-glib-1.0-0 \
+  libmariadb3 \
+  libmosquitto1 \
+  libopus0 \
+  libpcap0.8 \
+  libspandsp2 \
+  libssl3 \
+  libswresample4 \
+  libwebsockets17 \
+  libxmlrpc-core-c3 && \
+  apt-get install -y /tmp/*.deb && \
+  apt-get clean autoclean && \
+  apt-get autoremove --yes && \
+  rm -rf /tmp/*.deb
+
+COPY entrypoint.sh /
+RUN chmod 755 entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+
