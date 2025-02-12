@@ -78,6 +78,7 @@ _Note, in case FreeSWITCH is registering over TLS SIP profile with port 5061, th
 - generate certificates: `./certs.sh`
 - set `#!define WITH_TLS` in config template
 - for FreeSWITCH, follow `README.md` instructions in FreeSWITCH directory
+- for clients, follow instructions below
 
 ### Linphone or Standard SIP Client
 
@@ -96,6 +97,7 @@ TlS setup:
   client_cert_key=~/linphone/ext1000key.pem
   verify_server_certs=1
   verify_server_cn=1
+  contact=sip:1000@192.168.0.152:5061
   ```
 
 _Note: dont forget to replace ~_
@@ -138,6 +140,8 @@ const simpleUserOptions: SimpleUserOptions = {
   ...
 };
 ```
+
+_Note: use wss schema in Web Socket server in case Kamailio is started with TLS._
 
 Add incoming calls handler to `SimpleUserDelegate`:
 

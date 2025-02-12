@@ -45,5 +45,5 @@ rtpengine-ctl list sessions all
 - https://rtpengine.readthedocs.io/en/latest/overview.html
 - https://rtpengine.readthedocs.io/en/latest/usage.html
 - https://rtpengine.readthedocs.io/en/latest/rtpengine.html
-- https://www.kamailio.org/docs/modules/5.4.x/modules/rtpengine.html
+- https://www.kamailio.org/docs/modules/5.7.x/modules/rtpengine.html
 - https://nickvsnetworking.com/kamailio-bytes-rtp-media-proxying-with-rtpengine/

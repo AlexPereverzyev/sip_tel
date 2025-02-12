@@ -63,7 +63,7 @@
     <param name="user-agent-string" value="FS" />
     <param name="inbound-use-callid-as-uuid" value="true" />
     <param name="outbound-use-uuid-as-callid" value="true" />
-    <param name="enable-compact-headers" value="true" />
+    <param name="enable-compact-headers" value="false" />
     <param name="suppress-cng" value="true" />
     <param name="disable-hold" value="true" />
     <param name="manage-presence" value="false" />

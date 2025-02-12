@@ -72,10 +72,14 @@ To switch back to SQLite (_/var/lib/freeswitch/db_), comment-out:
 
 ## TLS Setup
 
-- after executing `./certs.sh` in `kamailio` directory:
-  - append `freeswitch` certificate to private key file, copy it to `etc/tls` directory and rename it to `agent.pem`
-  - copy `cacert.pem` to `etc/tls` directory and rename it to `cafile.pem`
-  - set `register-transport` to `tls` in `internal.xml` kamailio gateway
+After executing `./certs.sh` in `kamailio` directory:
+
+- append `freeswitch` certificate to private key file, copy it to `etc/tls` directory and rename it to `agent.pem`
+- copy `cacert.pem` to `etc/tls` directory and rename it to `cafile.pem`
+- set `register-transport` to `tls` in `internal.xml` kamailio gateway
+- set `kamailio` gateway transprot to `tls` in `internal.xml`
+
+_Note: optionally, Linphone can be configured to use secure media (Calls and Chat preferences), at the same time secure media can be forced in FreeSWITCH dialplan._
 
 ## Misc
 

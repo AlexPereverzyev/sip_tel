@@ -11,19 +11,19 @@ RTPEngine is used as media proxy to ensure devices behind symmetric NAT can send
 ```
 |----------|   SRTP/DTLS    |------------| 
 | Browser  |<-------------->|            |
-| SIP.js   |----\  RTP/UDP  | RTPEngine  |<--------|
-| Ext 1000 |     \/-------->|            |         |
+| SIP.js   |----\   (S)RTP  | RTPEngine  |<--------|
+| Ext 1002 |     \/-------->|            |         |
 |----------|     /\         |------------|         |
                 /  \              | NGCP           |                            
 |----------|   / SIP\WS\WSS |------------|         |
 | Mobile   |<-/      \----->|            |         |
-| Linphone |  SIP\TCP\TLS   | Kamailio   | RTP/UDP |
+| Linphone |  SIP\TCP\TLS   | Kamailio   | (S)RTP  |
 | Ext 1001 |--------------->|            |         |
 |----------|                |------------|         |
                                   | SIP\TCP\TLS    |
 |----------|  SIP\TCP\TLS  |------------|          |
 | Desktop  |-------------->|            |          |
-| Linphone |    RTP/UDP    | FreeSWITCH |<---------|
+| Linphone |    (S)RTP     | FreeSWITCH |<---------|
 | Ext 1000 |<------------->|            |
 |----------|               |------------|
 ```
@@ -31,7 +31,7 @@ RTPEngine is used as media proxy to ensure devices behind symmetric NAT can send
 ## Implementation
 
 * Scalable SIP router and media proxy configuration
-* Persistent TCP/TLS connections with softphones and PBXs
+* Persistent TCP/TLS/WSS signaling connections and secure media
 * SIP requests are routed to the specific instance where the target softphone/PBX is registered
 * Locations and extension mappings are stored in a shared PostgreSQL database
 * Uses standard Kamailio modules only: usrloc, registrar, postgres, sqlops, nathelper, tls
