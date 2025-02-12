@@ -1,10 +1,32 @@
-## Connecting Softphones and FreeSWITCH PBXs with Kamailio + RTPEngine
+## Simple, Hackable, Containerized Kamailio, RTPEngine and FreeSWITCH Configuration
 
 This project demonstrates how Kamailio, a SIP router, can connect tenant FreeSWITCH PBXs and softphones. It enables features like advanced call routing, logging, measurements, and NAT traversal.
 
 ## Main Use Case
 
-Remote softphones register with Kamailio, which routes SIP requests to the configured FreeSWITCH PBX. When a call arrives to FreeSWITCH, it rings both the local and remote softphones simultaneously and/or sends call to a PSTN gateway (Twilio). Local (internal) softphones can also make calls to remote softphones through Kamailio. RTPEngine is used as media proxy to ensure devices behind symmetric NAT can commmunicate with each other.
+Remote softphones register with Kamailio, which routes SIP requests to pre-configured FreeSWITCH PBX. When a call arrives to FreeSWITCH, it rings both the local and remote softphones simultaneously and/or sends call to a PSTN gateway (Twilio). Local (internal) softphones can also make calls to remote softphones through Kamailio.
+
+RTPEngine is used as media proxy to ensure devices behind symmetric NAT can send media to each other and to bridge traditional SIP clients with WebRTC clients.
+
+```
+|----------|   SRTP/DTLS    |------------| 
+| Browser  |<-------------->|            |
+| SIP.js   |----\  RTP/UDP  | RTPEngine  |<--------|
+| Ext 1000 |     \/-------->|            |         |
+|----------|     /\         |------------|         |
+                /  \              | NGCP           |                            
+|----------|   / SIP\WS\WSS |------------|         |
+| Mobile   |<-/      \----->|            |         |
+| Linphone |  SIP\TCP\TLS   | Kamailio   | RTP/UDP |
+| Ext 1001 |--------------->|            |         |
+|----------|                |------------|         |
+                                  | SIP\TCP\TLS    |
+|----------|  SIP\TCP\TLS  |------------|          |
+| Desktop  |-------------->|            |          |
+| Linphone |    RTP/UDP    | FreeSWITCH |<---------|
+| Ext 1000 |<------------->|            |
+|----------|               |------------|
+```
 
 ## Implementation
 
@@ -13,7 +35,7 @@ Remote softphones register with Kamailio, which routes SIP requests to the confi
 * SIP requests are routed to the specific instance where the target softphone/PBX is registered
 * Locations and extension mappings are stored in a shared PostgreSQL database
 * Uses standard Kamailio modules only: usrloc, registrar, postgres, sqlops, nathelper, tls
-* Tested with Linphone and Zoiper softphones on Linux and Android
+* Tested with Linphone, Zoiper softphones on Linux and Android and SIP.js WebRTC client
 * FreeSWITCH uses a Node.js configurator app, that serves dialplan via REST API
 * FreeSWITCH is configured to use PostgreSQL for core, sofia, and voicemail modules
 

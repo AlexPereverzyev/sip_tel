@@ -9,11 +9,14 @@ docker run --name kamailio \
 -d kamailio:local
 ```
 
+_Note: make sure database container is running before starting Kamailio._
+
 _Note: by default Kamailio uses RTPEngine instance as media proxy, if you dont want it, just undefine `WITH_RTPENGINE` in configuration file._
 
 After container has started, you can:
 
 ```
+docker logs -f kamailio
 docker exec -it kamailio sngrep
 docker exec -it kamailio kamcmd ul.dump
 docker stop kamailio && docker rm kamailio
@@ -27,7 +30,7 @@ docker cp kamailio:/etc/kamailio etc_default
 
 ### Kamailio Database
 
-Make sure PostgreSQL container is started:
+Start PostgreSQL container:
 
 ```
 docker run --name postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres:17
@@ -61,7 +64,7 @@ CREATE TABLE usr_pbx (
 INSERT INTO usr_pbx (usr, sip_ep) VALUES ('freeswitch', 'skip');
 INSERT INTO usr_pbx (usr, sip_ep) VALUES ('1000', 'sip:freeswitch@192.168.0.000:5060');
 INSERT INTO usr_pbx (usr, sip_ep) VALUES ('1001', 'sip:freeswitch@192.168.0.000:5060');
-INSERT INTO usr_pbx (usr, sip_ep) VALUES ('1002', 'sip:freeswitch@192.168.0.000:5060');
+INSERT INTO usr_pbx (usr, sip_ep) VALUES ('1000', 'sip:freeswitch@192.168.0.000:5060');
 ```
 
 _Note, setting `skip` for particular extension makes it freely routale w/o FreeSWITCH._
@@ -72,36 +75,100 @@ _Note, in case FreeSWITCH is registering over TLS SIP profile with port 5061, th
 
 ## TLS Setup
 
--   generate certificates: `./certs.sh`
--   set `#!define WITH_TLS` in config template
--   for FreeSWITCH, follow `README.md` instructions in FreeSWITCH directory
+- generate certificates: `./certs.sh`
+- set `#!define WITH_TLS` in config template
+- for FreeSWITCH, follow `README.md` instructions in FreeSWITCH directory
 
-### TLS for Linphone
+### Linphone or Standard SIP Client
 
--   make `linphone` directory in home
--   copy `cacert.pem` from kamailio directory to `linphone` directory
--   copy `ext1002cert.pem` and `ext1002key.pem` to `linphone` directory
--   update linphone config: `nano ~/.config/linphone/linphonerc`:
+https://www.linphone.org/en/linphone-softphone/
 
-```
-[sip]
-root_ca=~/linphone/cacert.pem
-client_cert_chain=~/linphone/ext1002cert.pem
-client_cert_key=~/linphone/ext1002key.pem
-verify_server_certs=1
-verify_server_cn=1
-```
+TlS setup:
+
+- make `linphone` directory in home
+- copy `cacert.pem` from kamailio directory to `linphone` directory
+- copy `ext1000cert.pem` and `ext1000key.pem` to `linphone` directory
+- update linphone config: `nano ~/.config/linphone/linphonerc`:
+  ```
+  [sip]
+  root_ca=~/linphone/cacert.pem
+  client_cert_chain=~/linphone/ext1000cert.pem
+  client_cert_key=~/linphone/ext1000key.pem
+  verify_server_certs=1
+  verify_server_cn=1
+  ```
 
 _Note: dont forget to replace ~_
 
-#### Alternatively (not tested)
+Alternatively (not tested):
 
 ```
 sudo cp ~/linphone/cacert.pem /usr/local/share/ca-certificates/cacert.crt
 sudo update-ca-certificates
 ```
 
+### SIP.JS or WebRTC Client
+
+https://github.com/onsip/SIP.js
+
+You can use modified SIP.js demo page as Web client, for example, the following config can be added to `demo-1.ts` at https://github.com/onsip/SIP.js/tree/main/demo:
+
+```typescript
+// WebSocket Server URL
+const webSocketServer = "ws://192.168.0.152:5080";
+
+// Destination URI
+const target = "sip:9999@192.168.0.152:5080";
+
+// Name for demo user
+const displayName = "1002";
+
+// SimpleUser options
+const simpleUserOptions: SimpleUserOptions = {
+  aor: "sip:1002@192.168.0.152:5080",
+  userAgentOptions: {
+    logLevel: "debug",
+    instanceIdAlwaysAdded: true,
+    viaHost: "192.168.0.152",
+    displayName,
+    contactName: displayName,
+    authorizationUsername: "1002",
+    authorizationPassword: "12345"
+  },
+  ...
+};
+```
+
+Add incoming calls handler to `SimpleUserDelegate`:
+
+```typescript
+  ...
+  onCallReceived: async () => {
+    console.log("Incoming Call!");
+    await simpleUser.answer();
+  },
+  ...
+```
+
+Follow instructions in SIP.js demo `README.md` to build the demo page, then:
+
+- open demo page in the browser, eg:
+  ```
+  file:///home/alex/Documents/SIP.js/demo/demo-1.html
+  ```
+- open Web development tools and observe SIP.js debug logs and network requests
+
+TLS setup:
+
+- disable certificate validation in `server:default` profile of `tls.cfg`.
+- start browser w/o certificates validation, for example with Chromium:
+  ```
+  chromium --ignore-certificate-errors
+  ```
+
 ## Datadog Metrics
+
+Start Datadog agent in container:
 
 ```
 docker run --name dd-agent \
@@ -116,6 +183,10 @@ docker run --name dd-agent \
 
 docker stop dd-agent && docker rm dd-agent
 ```
+
+Enable periodic metrics push to the agent: add `#!define WITH_TLS` to configuration template.
+
+References:
 
 - https://www.kamailio.org/docs/modules/5.7.x/modules/timer.html
 - https://www.kamailio.org/docs/modules/5.7.x/modules/rtimer.html

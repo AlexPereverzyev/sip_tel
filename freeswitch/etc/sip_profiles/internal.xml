@@ -26,6 +26,11 @@
     <param name="apply-inbound-acl" value="domains" />
     <param name="apply-register-acl" value="none" />
     <param name="local-network-acl" value="localnet.auto" />
+    <param name="apply-candidate-acl" value="wan_v4.auto"/>
+    <param name="apply-candidate-acl" value="localnet.auto"/>
+    <param name="apply-candidate-acl" value="rfc1918.auto"/>
+    <param name="apply-candidate-acl" value="any_v4.auto"/>
+
     <param name="sip-port" value="5060" />
     <param name="rtp-ip" value="$${local_ip_v4}" />
     <param name="sip-ip" value="$${local_ip_v4}" />

@@ -4,6 +4,7 @@
     <extension name="test">
       <!-- <condition field="${acl(${network_addr} local)}" expression="true" /> -->
       <condition field="destination_number" expression="^9999$">
+        <!-- <action application="set" data="ignore_sdp_ice=true"/> -->
         <!-- <action application="check_acl" data="${network_addr} local normal_clearing" inline="true" /> -->
         <action application="ring_ready" />
         <action application="answer" />

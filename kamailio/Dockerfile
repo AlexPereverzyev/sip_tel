@@ -11,8 +11,9 @@ RUN apt-get update && \
     kamailio-postgres-modules \
     kamailio-json-modules \
     kamailio-extra-modules \
+    kamailio-tls-modules \
     kamailio-outbound-modules \
-    kamailio-tls-modules && \
+    kamailio-websocket-modules && \
     apt-get clean autoclean && \
     apt-get autoremove --yes
 

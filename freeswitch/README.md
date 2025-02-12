@@ -27,6 +27,8 @@ docker run --name freeswitch \
 -d freeswitch:local
 ```
 
+_Note: make sure database container is running before starting FreeSWITCH._
+
 After container has started, you can:
 
 ```
@@ -64,15 +66,16 @@ pg_restore --clean --if-exists -U postgres -h localhost -p 5432 -d freeswitch -v
 _Note: this should be started before FreeSWITCH container._
 
 To switch back to SQLite (_/var/lib/freeswitch/db_), comment-out:
+
 - `core-db-dsn` parameter in `switch.conf.xml`
 - `odbc-dsn` parameter in `internal.xml` SIP profile
 
 ## TLS Setup
 
--   after executing `./certs.sh` in kamailio directory:
-    - append freeswitch certificate to private key file, copy it to `etc/tls` directory and rename it to `agent.pem`
-    - copy `cacert.pem` to `etc/tls` directory and rename it to `cafile.pem`
-    - set `register-transport` to `tls` in `internal.xml` kamailio gateway
+- after executing `./certs.sh` in `kamailio` directory:
+  - append `freeswitch` certificate to private key file, copy it to `etc/tls` directory and rename it to `agent.pem`
+  - copy `cacert.pem` to `etc/tls` directory and rename it to `cafile.pem`
+  - set `register-transport` to `tls` in `internal.xml` kamailio gateway
 
 ## Misc
 
