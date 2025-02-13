@@ -11,21 +11,21 @@ RTPEngine is used as media proxy to ensure devices behind symmetric NAT can send
 ```
 |----------|   SRTP/DTLS    |------------| 
 | Browser  |<-------------->|            |
-| SIP.js   |----\   (S)RTP  | RTPEngine  |<--------|
-| Ext 1002 |     \/-------->|            |         |
-|----------|     /\         |------------|         |
-                /  \              | NGCP           |                            
-|----------|   / SIP\WS\WSS |------------|         |
-| Mobile   |<-/      \----->|            |         |
-| Linphone |  SIP\TCP\TLS   | Kamailio   | (S)RTP  |
-| Ext 1001 |--------------->|            |         |
-|----------|                |------------|         |
-                                  | SIP\TCP\TLS    |
-|----------|  SIP\TCP\TLS  |------------|          |
-| Desktop  |-------------->|            |          |
-| Linphone |    (S)RTP     | FreeSWITCH |<---------|
-| Ext 1000 |<------------->|            |
-|----------|               |------------|
+| SIP.js   |----\   (S)RTP  | RTPEngine  |<-------|
+| Ext 1002 |     \/-------->|            |        |
+|----------|     /\         |------------|        |
+                /  \              | NGCP          |                            
+|----------|   / SIP\WS\WSS |------------|        |
+| Mobile   |<-/      \----->|            |        | (S)RTP
+| Linphone |  SIP\TCP\TLS   | Kamailio   |        |  
+| Ext 1001 |--------------->|            |---------->|------------|
+|----------|                |------------|        |  |            |
+                                  | SIP\TCP\TLS   |  | PostgreSQL |
+|----------|  SIP\TCP\TLS   |------------|        |  |            |
+| Desktop  |--------------->|            |---------->|------------| 
+| Linphone |    (S)RTP      | FreeSWITCH |<-------|  |------------|
+| Ext 1000 |<-------------->|            |  ESL,REST |Configurator| 
+|----------|                |------------|---------->|------------|
 ```
 
 ## Implementation
