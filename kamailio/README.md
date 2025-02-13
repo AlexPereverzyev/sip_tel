@@ -84,7 +84,7 @@ _Note, in case FreeSWITCH is registering over TLS SIP profile with port 5061, th
 
 https://www.linphone.org/en/linphone-softphone/
 
-TlS setup:
+TLS setup:
 
 - make `linphone` directory in home
 - copy `cacert.pem` from kamailio directory to `linphone` directory
