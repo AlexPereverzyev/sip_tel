@@ -18,6 +18,8 @@
     <load module="mod_expr"/>
     <load module="mod_hash"/>
     <load module="mod_voicemail"/>
+    <load module="mod_fifo"/>
+    <load module="mod_callcenter"/>
 
     <!-- Dialplan Interfaces -->
     <load module="mod_dialplan_xml"/>

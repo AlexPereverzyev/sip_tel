@@ -58,6 +58,7 @@
     <param name="rtp-timer-name" value="soft" />
     <param name="rfc2833-pt" value="101" />
     <param name="dtmf-duration" value="2000" />
+    <param name="rtcp-audio-interval-msec" value="1000"/>
 
     <param name="username" value="FS" />
     <param name="user-agent-string" value="FS" />

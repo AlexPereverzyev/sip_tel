@@ -7,6 +7,7 @@
         <!-- <action application="check_acl" data="${network_addr} local normal_clearing" inline="true" /> -->
         <!-- <action application="set" data="rtp_secure_media=true"/> -->
         <!-- <action application="set" data="ignore_sdp_ice=true"/> -->
+        <action application="set" data="fire_rtcp_events=true"/>
         <action application="ring_ready" />
         <action application="answer" />
         <action application="sleep" data="1000" />
@@ -22,6 +23,85 @@
         <action application="playback" data="ivr/ivr-hello.wav" />
         <action application="voicemail" data="check default $${domain}" />
         <action application="hangup" />
+      </condition>
+    </extension>
+
+    <!-- https://developer.signalwire.com/freeswitch/FreeSWITCH-Explained/Modules/mod_fifo_3966031/ -->
+    <!-- 6*[0-9] -->
+    <extension name="fifo_agent_login">
+      <condition field="destination_number" expression="^6\*(\d)">
+        <action application="answer"/>
+        <action application="set" data="result=${fifo_member(add test_queue$1 {fifo_member_wait=nowait}user/${user_name} )"/>
+        <action application="log" data="INFO Added test_queue$1 agent ${user_name}: ${result}"/>
+        <action application="playback" data="ivr/ivr-you_are_now_logged_in.wav"/>
+      </condition>
+    </extension>
+    <!-- 6**[0-9] -->
+    <extension name="fifo_agent_logout">
+      <condition field="destination_number" expression="^6\*\*(\d)">
+        <action application="answer"/>
+        <action application="set" data="result=${fifo_member(del test_queue$1 {fifo_member_wait=nowait}user/${user_name})}"/>
+        <action application="log" data="INFO Removed test_queue$1 agent ${user_name}: ${result}"/>
+        <action application="playback" data="ivr/ivr-you_are_now_logged_out.wav"/>
+      </condition>
+    </extension>
+    <!-- 6***[0-9] -->
+    <extension name="fifo_agent_wait">
+      <condition field="destination_number" expression="^6\*\*\*(\d)$">
+        <action application="answer"/>
+        <action application="fifo" data="test_queue$1 out wait ivr/ivr-connect_to_caller.wav ivr/ivr-on_hold_indefinitely.wav"/>
+      </condition>
+    </extension>
+    <!-- 666[0-9] -->
+    <extension name="fifo_caller_queue">
+      <condition field="destination_number" expression="^666(\d)$">
+        <action application="answer"/>
+        <action application="set" data="fifo_music=$${hold_music}"/>
+        <action application="set" data="fifo_chime_freq=5"/>
+        <action application="set" data="fifo_chime_list=phrase:fifo_position:${uuid}" />
+        <action application="playback" data="ivr/ivr-hold_connect_call.wav"/>
+        <action application="fifo" data="test_queue$1 in"/>
+      </condition>
+    </extension>
+
+      <!-- https://developer.signalwire.com/freeswitch/FreeSWITCH-Explained/Modules/mod_callcenter_1049389/ -->
+    <extension name="cc_agent_login">
+      <condition field="destination_number" expression="^5551$">
+        <action application="set" data="res=${callcenter_config(agent set type ${caller_id_number} 'callback')}" />
+        <action application="set" data="res=${callcenter_config(agent set status ${caller_id_number} 'Available')}" />
+        <action application="set" data="res=${callcenter_config(agent set state ${caller_id_number} 'Waiting')}" />
+        <action application="answer" data="" />
+        <action application="sleep" data="500" />
+        <action application="playback" data="ivr/ivr-you_are_now_logged_in.wav" />
+        <action application="hangup" data="" />
+      </condition>
+    </extension>
+    <extension name="cc_agent_logoff">
+      <condition field="destination_number" expression="^5552$">
+        <action application="set" data="res=${callcenter_config(agent set status ${caller_id_number} 'Logged Out')}" />
+        <action application="answer" data="" />
+        <action application="sleep" data="500" />
+        <action application="playback" data="ivr/ivr-you_are_now_logged_out.wav" />
+        <action application="hangup" data="" />
+      </condition>
+    </extension>
+    <extension name="cc_agent_wait">
+      <condition field="destination_number" expression="^5550$">
+        <action application="set" data="transfer_after_bridge=5550"/>
+        <action application="sleep" data="300"/>
+        <action application="set" data="res=${callcenter_config(agent set uuid ${caller_id_number} '${uuid}')}" />
+        <action application="set" data="res=${callcenter_config(agent set type ${caller_id_number} 'uuid-standby')}" />
+        <action application="set" data="res=${callcenter_config(agent set status ${caller_id_number} 'Available (On Demand)')}" />
+        <action application="set" data="res=${callcenter_config(agent set state ${caller_id_number} 'Waiting')}" />
+        <action application="set" data="cc_warning_tone=tone_stream://%(200,0,500,600,700)"/>
+        <action application="answer" />
+        <action application="playback" data="$${hold_music}"/>
+      </condition>
+    </extension> 
+    <extension name="cc_caller_queue">
+      <condition field="destination_number" expression="^5555$">
+        <action application="answer"/>
+        <action application="callcenter" data="test_queue1"/>
       </condition>
     </extension>
 

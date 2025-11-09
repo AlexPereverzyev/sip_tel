@@ -1,0 +1,5 @@
+<configuration name="callcenter.conf" description="CallCenter Configuration">
+  <settings>
+    <param name="odbc-dsn" value="$${dsn}"/>
+  </settings>
+</configuration>

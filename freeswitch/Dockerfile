@@ -26,6 +26,8 @@ RUN apt-get update && \
     freeswitch-mod-native-file \
     freeswitch-mod-tone-stream \
     freeswitch-mod-dptools \
+    freeswitch-mod-fifo \
+    freeswitch-mod-callcenter \
     freeswitch-mod-hash \
     freeswitch-mod-pgsql \
     freeswitch-meta-codecs \

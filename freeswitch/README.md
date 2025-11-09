@@ -50,7 +50,7 @@ The image relies on local PostgreSQL database instance:
 ```
 docker run --name postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres:17
 docker exec -it postgres psql -U postgres -c 'CREATE DATABASE freeswitch OWNER postgres;'
-docker exec -it postgres psql -U postgres -c 'CREATE SCHEMA fs AUTHORIZATION postgres;'
+docker exec -it postgres psql -U postgres -d freeswitch -c 'CREATE SCHEMA fs AUTHORIZATION postgres;'
 
 ```
 
@@ -83,6 +83,15 @@ _Note: optionally, Linphone can be configured to use secure media (Calls and Cha
 
 ## Misc
 
+### Supported Extensions
+
+- 9999: XML dialplan test
+- 8888: cURL/ESL dialplan test (requires running `configurator` app)
+- 7777: voicemail box
+- 6xxx: fifo call queues
+- 555x: call center queues
+- 100[0-2]: directory users (extensions)
+
 ### Status and Reload Commands
 
 From `fs_cli` run one of the following:
@@ -98,12 +107,40 @@ sofia profile internal rescan
 sofia profile internal restart
 ```
 
-### Supported Extensions
+### Call Center Commands
 
-- 9999: XML dialplan test
-- 8888: cURL/ESL dialplan test (requires running `configurator` app)
-- 7777: voicemail box
-- 100[0-2]: directory users (extensions)
+Queues:
+
+```
+callcenter_config queue list
+callcenter_config queue load test_queue1
+callcenter_config queue unload test_queue1
+callcenter_config queue reload test_queue1
+```
+
+_Note: queues are configured in XML file only, but can be delivered via Web hook._
+
+Agents:
+
+```
+callcenter_config agent list
+callcenter_config agent del 1000
+callcenter_config agent add 1000 callback
+callcenter_config agent set contact 1000 '[leg_timeout=10]user/1000'
+callcenter_config agent set status 1000 Available
+callcenter_config agent set state 1000 Waiting
+callcenter_config agent set max_no_answer 1000 3
+callcenter_config agent set wrap_up_time 1000 10
+callcenter_config agent set reject_delay_time 1000 10
+callcenter_config agent set busy_delay_time 1000 60
+```
+
+Agent to Queues Mapping:
+
+```
+callcenter_config tier list
+callcenter_config tier add test_queue1 1000 1 1
+```
 
 ### Add More Users
 
@@ -116,6 +153,7 @@ sofia profile internal restart
 Setup call to user 1001 from 1000 or simring users 1001 and 1002:
 
 ```
+originate user/1000 9999 XML default
 originate user/1000 &bridge(user/1001)
 originate user/1000 &bridge({ignore_early_media=true}user/1001,user/1002)
 ```
